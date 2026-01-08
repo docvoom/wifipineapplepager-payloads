@@ -8,7 +8,7 @@
 
 <p align="center">
 <img src="https://img.shields.io/badge/Platform-WiFi%20Pineapple%20Pager-00d4aa?style=flat-square" />
-<img src="https://img.shields.io/badge/Version-1.3.0-blue?style=flat-square" />
+<img src="https://img.shields.io/badge/Version-1.4.1-blue?style=flat-square" />
 <img src="https://img.shields.io/badge/Author-JustSomeTrout-purple?style=flat-square" />
 </p>
 
@@ -24,25 +24,34 @@
 ```
 
 <p align="center">
-<img width="1675" height="1098" alt="Nautilus Dashboard" src="https://github.com/user-attachments/assets/b8538b40-b585-4828-9819-cf73c137980b" />
+<img width="2694" height="828" alt="Nautilus Dashboard" src="https://github.com/user-attachments/assets/579322bc-81d6-4941-9bc2-2dfdcfe57465" />
 </p>
 
 <p align="center">
 <img width="600" height="4" alt="" src="https://github.com/user-attachments/assets/8560a6c9-b1f1-4eed-ac94-bd9e14d36ac5" />
 </p>
 
+## 🆕 New in v1.4
+
+### 🖥️ Full Shell Terminal Access
+Nautilus now includes a complete interactive shell terminal powered by ttyd:
+
+- **Full PTY Support**: Real terminal emulation with proper escape sequences, colors, and cursor control
+- **Interactive Programs**: Run `vi`, `nano`, `top`, `htop`, and any interactive CLI tool
+- **Tab Completion**: Full bash/sh tab completion support
+- **Resize Support**: Terminal automatically resizes to fit your browser window
+- **Persistent Sessions**: Shell stays active while you switch between tabs
+- **One-Click Access**: Terminal tab always available in the navigation bar
+
+Access the shell from the **Terminal** tab - no SSH client needed!
+
+---
+
 ## Overview
 
 **Nautilus** transforms your WiFi Pineapple Pager into a web-accessible payload command center. Launch, monitor, and interact with payloads from your phone, laptop, tablet, or any device with a browser.
 
-### 🚀 NEW in v1.3: GitHub Integration
 
-**Run payloads directly from GitHub without installing them!** Nautilus now connects to the official [wifipineapplepager-payloads](https://github.com/hak5/wifipineapplepager-payloads) repository, letting you:
-
-- **Browse Merged Payloads**: Access the entire official payload library instantly
-- **Test Pull Requests**: Run payloads from open PRs before they're merged
-- **Zero Installation**: Payloads download to temp storage, execute, and clean up automatically
-- **Stay Current**: Always run the latest version without manual updates
 
 **Nautilus answers the question:**
 
@@ -63,8 +72,9 @@ No more fumbling with D-pad navigation or manual file transfers. Just point, cli
 - **One-Click Execution**: Run any payload with a single tap
 - **Live Console**: Watch output stream in real-time with color support
 - **Stop Control**: Abort running payloads at any time
+- **Shell Terminal**: Full interactive shell access with PTY support (new in v1.4)
 
-### 🌐 GitHub Integration (NEW in v1.3)
+### 🌐 GitHub Integration
 
 Nautilus now has three payload sources accessible via tabs:
 
@@ -80,6 +90,17 @@ Nautilus now has three payload sources accessible via tabs:
 - **Test New Payloads**: PRs tab lets you try community contributions before they're approved
 - **Automatic Cleanup**: Downloaded payloads are removed after execution
 - **Cached for Speed**: GitHub payload list is cached locally for fast browsing
+- **Install to Local**: Save GitHub payloads permanently to your Pager with one click
+- **Uninstall Payloads**: Remove local payloads directly from the web interface
+
+### 📶 WiFi Client Mode
+
+Configure your Pager's WiFi client connection directly from Nautilus:
+
+- **Scan Networks**: Browse available WiFi networks with signal strength indicators
+- **Connect**: Enter credentials and connect to any network
+- **Disconnect**: Drop the current connection with one click
+- **Toggle Client Mode**: Enable/disable the client interface
 
 ### Interactive Prompts
 Nautilus intercepts and displays DuckyScript prompts in the web UI:
