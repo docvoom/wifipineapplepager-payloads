@@ -18,4 +18,4 @@ This is my first Bash script, and so could not have been done without examining 
 
 ## Updates
 1.0.1 > Fixed issue allowing scans without entering a target first. Fixed text entry label for manual entry. General bug fixes.
-1.0.2 > Removed spinner. Moved saved scans to the loot directory.
+1.0.2 > Moved saved scans to the loot directory. Bug fixes.
