@@ -3,7 +3,7 @@
 # Description: Searches for devices broadcasting probe requests for a specified SSID
 # Acknowledgements: Some parts of this code (SSID Pool) were adapted from Device_Hunter by RocketGod and NotPike Helped (Crew: The Pirates' Plunder). Also, thanks to dark_pyrro.
 # Author: DocVoom
-# Version: 1.0.1
+# Version: 1.0.2
 
 # Global variables
 SELECTED=0
@@ -13,6 +13,9 @@ TARGET_SSID=""
 ALERT_TONE="alert.rtttl"
 date=$(date '+%m%d%Y')
 
+LOOT_DIR="/root/loot/probehound"
+mkdir -p "$LOOT_DIR"
+
 # FUNCTIONS
 collect_targets() {
     LOG "Collecting SSID Pool"
@@ -20,7 +23,7 @@ collect_targets() {
     TOTAL_SSIDS=${#SSID_ARRAY[@]}
 
     if [ $TOTAL_SSIDS -eq 0 ]; then
-    	LOG "No targets found"
+    	LOG red "No targets found"
     	exit 1
     fi
 	LOG "Found $TOTAL_SSIDS targets"
@@ -28,9 +31,9 @@ collect_targets() {
 
 show_target() {
     LOG ""
-    LOG "[$((SELECTED + 1))/$TOTAL_SSIDS] ${SSID_ARRAY[$SELECTED]}"
+    LOG yellow "[$((SELECTED + 1))/$TOTAL_SSIDS] ${SSID_ARRAY[$SELECTED]}"
     LOG ""
-    LOG "UP/DOWN=Scroll A=Select B=exit"
+    LOG green "UP/DOWN=Scroll A=Select B=exit"
 }
 
 select_target() {
@@ -69,17 +72,17 @@ recon() {
                 if echo "$line" | grep -q "$1"; then
                         DEVICE=$(echo "$line" | grep -Eo '([0-9a-fA-F]{2}:){5}[0-9a-fA-F]{2}')
                         SIGNAL=$(echo "$line" | grep -Eo '[0-9]+dBm')
-                        LOG "*** CLIENT DETECTED! ***"
-                        LOG "<$DEVICE> <$SIGNAL> <$1>"
+                        LOG yellow "*** CLIENT DETECTED! ***"
+                        LOG yellow "<$DEVICE> <$SIGNAL> <$1>"
                         LOG ""
                         RINGTONE $ALERT_TONE
                         LOG "Saving to scan log..."
-                        echo "$line" | tee -a "logs/${date}-scanlog.txt"
+                        echo "$line" | tee -a "$LOOT_DIR/${date}-scanlog.txt"
                         exit 0
                 fi
             done
         LOG ""
-        LOG "A=Continue / B=Exit"
+        LOG green "A=Continue / B=Exit"
         resp=$(WAIT_FOR_INPUT)
         case $resp in
             A) ;;
@@ -97,12 +100,12 @@ recon() {
 # MAIN MENU
 while :
 do
-    LOG "MAIN MENU ================================="
-    LOG "[<]  Select from SSID Pool"
-    LOG "[>]  Enter SSID"
-    LOG "[A]  Begin Scan"
-    LOG "[B]  Exit"
-    LOG "==========================================="
+    LOG blue "MAIN MENU ================================="
+    LOG blue "[<]  Select from SSID Pool"
+    LOG blue "[>]  Enter SSID"
+    LOG blue "[A]  Begin Scan"
+    LOG blue "[B]  Exit"
+    LOG blue "==========================================="
     LOG ""
     resp=$(WAIT_FOR_INPUT)
     case $resp in
@@ -110,18 +113,18 @@ do
             collect_targets
             select_target
             TARGET_SSID="${SSID_ARRAY[$SELECTED]}"
-            LOG "Selected target: $TARGET_SSID"
+            LOG yellow "Selected target: $TARGET_SSID"
             LOG ""
             ;;
         RIGHT)
             LOG "Enter Target"
             TARGET_SSID=$(TEXT_PICKER "SSID:" "")
-            LOG "Selected target: $TARGET_SSID"
+            LOG yellow "Selected target: $TARGET_SSID"
             LOG ""
             ;;
         A)
             if [[ -z $TARGET_SSID ]]; then
-                LOG "No target selected"
+                LOG red "No target selected"
             else
                 recon $TARGET_SSID
             fi
